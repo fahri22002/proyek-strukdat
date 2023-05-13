@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 #include <iostream>
 
 struct barang{
@@ -16,7 +16,6 @@ struct kurir{
 };
 struct antar{
     char idantar[7];
-    int jumlahbarang;
     barang unit;
     kurir kur;
     int prior;
@@ -37,4 +36,33 @@ riwayatptr createRiwayat(antar data){
     baru->data = data;
     baru->next = nullptr;
     baru->prev = nullptr;
+    return baru;
+}
+bool isEmpty(stack top){
+    return (top == nullptr)? true:false;
+}
+void push (stack &top, riwayatptr baru){
+    if (isEmpty(top)){
+        top = baru;
+    } else {
+        baru->next = top;
+        top->prev = baru;
+        top = baru;
+    }
+}
+riwayatptr pop (stack& top, stack& topcache){
+    riwayatptr temp;
+    if (isEmpty(top)){
+        return nullptr;
+    } else if(top->next == nullptr){
+        temp = top;
+        top = nullptr;
+    } else {
+        temp = top;
+        top = top->next;
+        temp->next = nullptr;
+        top->prev = nullptr;
+    } 
+    push (topcache, temp);
+    return temp;
 }
