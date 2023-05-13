@@ -26,3 +26,15 @@ struct riwayat{
     riwayat *next;
     riwayat *prev;
 };
+typedef riwayat *riwayatptr;
+using stack = riwayatptr;
+
+stack createstack(){
+    return nullptr;
+}
+riwayatptr createRiwayat(antar data){
+    riwayatptr baru = new riwayat;
+    baru->data = data;
+    baru->next = nullptr;
+    baru->prev = nullptr;
+}
