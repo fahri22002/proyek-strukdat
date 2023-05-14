@@ -16,7 +16,8 @@ struct kurir{
 };
 struct antar{
     char idantar[7];
-    barang unit;
+    int banyakBarang;
+    barang unit[10];
     kurir kur;
     int prior;
 };
