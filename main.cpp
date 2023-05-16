@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+#include <iomanip>
 #include "stack.hpp"
 #include "queue.hpp"
 #include "manage.hpp"
