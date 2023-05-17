@@ -14,9 +14,9 @@ struct riwayatkrm {
     riwayatkrm* next;
 };
 
-typedef riwayatkrm *first;
+typedef riwayatkrm *queue;
 
-void updRiwayat(const int& noRiwayat, const std::tm& waktu, char& idBarang, first& head) {
+void enqueue(const int& noRiwayat, const std::tm& waktu, char& idBarang, queue& head, queue& tail) {
     riwayatkrm* Node = new riwayatkrm;
     Node->noRiwayat = noRiwayat;
     Node->waktu = waktu;
@@ -24,17 +24,24 @@ void updRiwayat(const int& noRiwayat, const std::tm& waktu, char& idBarang, firs
     Node->next = nullptr;
 
     if (head == nullptr) {
-        head = Node;
+        head = tail = Node;
     } else {
-        riwayatkrm* current = head;
-        while (current->next != nullptr) {
-            current = current->next;
-        }
-        current->next = Node;
+        tail->next = Node;
+        tail = Node;
     }
 }
 
-void PrintRiwayat(first& head) {
+void dequeue(queue& head) {
+    if (head == nullptr) {
+        return; 
+    }
+  
+    riwayatkrm* temp = head;
+    head = head->next;
+    delete temp;
+}
+
+void printRiwayat(queue head) {
     riwayatkrm* current = head;
     while (current != nullptr) {
         std::cout << "No : " << current->noRiwayat << std::endl;
@@ -49,5 +56,4 @@ void PrintRiwayat(first& head) {
         current = current->next;
     }
 }
-
 
