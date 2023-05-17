@@ -10,7 +10,7 @@ antar input(){
     std::cin>>send.banyakBarang;
     barang unit[send.banyakBarang];
     for (int i = 0; i<send.banyakBarang; i++){
-        std::cout<<"barang ke-"<<i<<"\n";
+        std::cout<<"barang ke-"<<i+1<<"\n";
         std::cout<<"masukkan id unit (5 char)\n";
         std::cin>>unit[i].idBarang;
         std::cin.ignore();
