@@ -9,26 +9,13 @@ antar input(){
 
     std::cout<<"masukkan banyak barang\n";
     std::cin>>send.banyakBarang;
-    barang unit[send.banyakBarang];
+    listBarang unit;
+    unit = createlistbarang();
     for (int i = 0; i<send.banyakBarang; i++){
         std::cout<<"barang ke-"<<i+1<<"\n";
-        std::cout<<"masukkan id unit (5 char)\n";
-        std::cin>>unit[i].idBarang;
-        std::cin.ignore();
-        std::cout<<"masukkan nama pengirim\n";
-        getline(std::cin, unit[i].namaPengirim, '\n');
-        std::cout<<"masukkan alamat pengirim\n";
-        getline(std::cin, unit[i].alamatPengirim, '\n');
-        std::cout<<"masukkan noHP pengirim\n";
-        std::cin>>unit[i].noHp;
-        std::cin.ignore();
-        std::cout<<"masukkan nama penerima\n";
-        getline(std::cin, unit[i].namaPenerima, '\n');
-        std::cout<<"masukkan alamat penerima\n";
-        getline(std::cin, unit[i].alamatPenerima, '\n');
-        send.unit[i] = unit[i];
+        pushBarang(unit, createnode());
     }
-    
+    send.unit = unit;
     
     std::cout<<"masukkan id kurir 6 char\n";
     std::cin>>kur.idkurir;
@@ -90,16 +77,38 @@ stack edit(stack top, antar editData){
         int ch;
         int editn;
         std::cin>>ch;
+        std::cin.ignore();
+        barang unit;
         switch (ch){
             case 1:
-                //tinggal tambah
+                std::cout<<"barang ke-"<<temp->data.banyakBarang+1<<"\n";
+                temp->data.banyakBarang++;
+                std::cout<<"masukkan id unit (5 char)\n";
+                std::cin>>unit.idBarang;
+                std::cin.ignore();
+                std::cout<<"masukkan nama pengirim\n";
+                getline(std::cin, unit.namaPengirim, '\n');
+                std::cout<<"masukkan alamat pengirim\n";
+                getline(std::cin, unit.alamatPengirim, '\n');
+                std::cout<<"masukkan noHP pengirim\n";
+                std::cin>>unit.noHp;
+                std::cin.ignore();
+                std::cout<<"masukkan nama penerima\n";
+                getline(std::cin, unit.namaPenerima, '\n');
+                std::cout<<"masukkan alamat penerima\n";
+                getline(std::cin, unit.alamatPenerima, '\n');
+                temp->data.unit[temp->data.banyakBarang-1] = unit;
                 break;
             case 2:
-                //idbarang yg dihapus
+                temp->data.banyakBarang--;
                 break;
             case 3:
                 break;
         }
+        std::cout<<"id kurir 6 char = "<<temp->data.kur.idkurir<<"\n";
+        std::cout<<"edit menjadi:"; std::cin>>temp->data.kur.idkurir;
         std::cin.ignore();
+        std::cout<<"nama kurir"<<temp->data.kur.nama<<"\n";
+        std::cout<<"edit menjadi:";getline(std::cin, temp->data.kur.nama, '\n');
     }
 }
