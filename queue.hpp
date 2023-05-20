@@ -1,5 +1,6 @@
 #pragma once
 #include "stack.hpp"
+#include <ctime>
 
 struct antrian{
     antar data;

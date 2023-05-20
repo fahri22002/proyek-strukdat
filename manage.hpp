@@ -1,6 +1,7 @@
 #pragma once
 #include "stack.hpp"
 #include <iostream>
+#include <cstring>
 
 antar input(){
     antar send;
@@ -55,5 +56,49 @@ void showRiwayat(stack top){
         }
         top = top->next;
         i++;
+    }
+}
+
+antar searchData(stack top, char edit[]){
+    antar nullreturn;
+    std::strcpy(nullreturn.idantar, "000000");
+    while (top->data.idantar != edit ){
+        if (top->next == nullptr){
+            return nullreturn;
+            break;
+        }
+        top=top->next;
+    }
+    return top->data;
+}
+
+stack edit(stack top, antar editData){
+    stack temp = top;
+    if (editData.idantar == "000000"){
+        std::cout<<"tidak ditemukan!\n";
+        return top;
+    } else {
+        while (temp->data.idantar != editData.idantar){
+            temp = temp->next;
+        }
+        std::cout<<"idantar = "<<temp->data.idantar<<"\n";
+        std::cout<<"edit menjadi : "; std::cin>>temp->data.idantar;
+        std::cout<<"prioritas = "<<temp->data.prior<<"\n";
+        std::cout<<"edit menjadi : "; std::cin>>temp->data.prior;
+        std::cout<<"banyak barang = "<<temp->data.banyakBarang<<"\n";
+        std::cout<<"ketik:\n1. tambah\n2. hapus\n3. tidak keduanya\n";
+        int ch;
+        int editn;
+        std::cin>>ch;
+        switch (ch){
+            case 1:
+                //tinggal tambah
+                break;
+            case 2:
+                //idbarang yg dihapus
+                break;
+            case 3:
+                break;
+        }
     }
 }
