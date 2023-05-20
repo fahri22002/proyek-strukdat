@@ -100,5 +100,6 @@ stack edit(stack top, antar editData){
             case 3:
                 break;
         }
+        std::cin.ignore();
     }
 }
