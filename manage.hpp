@@ -38,8 +38,10 @@ void showRiwayat(stack top){
         std::cout<<top->data.idantar<<"\n";
         std::cout<<top->data.prior<<"\n";
         std::cout<<top->data.kur.nama<<"\n";
+        listBarang temp = top->data.unit;
         for (int i = 0; i<top->data.banyakBarang; i++){
-            std::cout<<top->data.unit[i].alamatPenerima<<"\n";
+            std::cout<<temp->idBarang<<"\n";
+            temp = temp->next;
         }
         top = top->next;
         i++;
@@ -111,4 +113,5 @@ stack edit(stack top, antar editData){
         std::cout<<"nama kurir"<<temp->data.kur.nama<<"\n";
         std::cout<<"edit menjadi:";getline(std::cin, temp->data.kur.nama, '\n');
     }
+    return top;
 }
