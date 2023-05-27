@@ -80,31 +80,17 @@ stack edit(stack top, antar editData){
         int editn;
         std::cin>>ch;
         std::cin.ignore();
-        barang unit;
         switch (ch){
             case 1:
                 std::cout<<"barang ke-"<<temp->data.banyakBarang+1<<"\n";
                 temp->data.banyakBarang++;
-                std::cout<<"masukkan id unit (5 char)\n";
-                std::cin>>unit.idBarang;
-                std::cin.ignore();
-                std::cout<<"masukkan nama pengirim\n";
-                getline(std::cin, unit.namaPengirim, '\n');
-                std::cout<<"masukkan alamat pengirim\n";
-                getline(std::cin, unit.alamatPengirim, '\n');
-                std::cout<<"masukkan noHP pengirim\n";
-                std::cin>>unit.noHp;
-                std::cin.ignore();
-                std::cout<<"masukkan nama penerima\n";
-                getline(std::cin, unit.namaPenerima, '\n');
-                std::cout<<"masukkan alamat penerima\n";
-                getline(std::cin, unit.alamatPenerima, '\n');
-                temp->data.unit[temp->data.banyakBarang-1] = unit;
+                pushBarang(temp->data.unit, createnode());
                 break;
             case 2:
                 temp->data.banyakBarang--;
-                break;
+                break;//edit barangnya di pop
             case 3:
+                //test
                 break;
         }
         std::cout<<"id kurir 6 char = "<<temp->data.kur.idkurir<<"\n";
