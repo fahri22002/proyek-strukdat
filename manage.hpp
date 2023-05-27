@@ -33,6 +33,9 @@ antar input(){
 }
 void showRiwayat(stack top){
     int i = 1;
+    if (top == nullptr){
+        return;
+    }
     while (top != nullptr){
         std::cout<<i<<"\n";//nanti buat tabel
         std::cout<<top->data.idantar<<"\n";
@@ -48,56 +51,47 @@ void showRiwayat(stack top){
     }
 }
 
-antar searchData(stack top, char edit[]){
-    antar nullreturn;
-    std::strcpy(nullreturn.idantar, "000000");
-    while (top->data.idantar != edit ){
+riwayat* searchData(stack top){
+    int id;
+    std::cin>>id;
+    std::cin.ignore();
+    riwayat *nullreturn = new riwayat;
+    nullreturn->data.idantar=0;
+    while (top->data.idantar != id ){
         if (top->next == nullptr){
             return nullreturn;
             break;
         }
         top=top->next;
     }
-    return top->data;
+    return (top);
 }
 
-stack edit(stack top, antar editData){
-    stack temp = top;
-    if (editData.idantar == "000000"){
-        std::cout<<"tidak ditemukan!\n";
-        return top;
+void deleteData(stack &top, riwayatptr search, stack& cache){
+    stack del = top;
+    while (del != search){
+        del = del->next;
+    } 
+    if (del->next == nullptr && del->prev == nullptr){
+        top=nullptr;
+    } else if (del->next == nullptr){
+        del->prev->next = nullptr;
+        del->prev = nullptr;
+        
+    } else if (del->prev == nullptr){
+        if(del == top){
+            top = top->next;
+        }
+        del->next->prev = nullptr;
+        del->next = nullptr;
+        
     } else {
-        while (temp->data.idantar != editData.idantar){
-            temp = temp->next;
-        }
-        std::cout<<"idantar = "<<temp->data.idantar<<"\n";
-        std::cout<<"edit menjadi : "; std::cin>>temp->data.idantar;
-        std::cout<<"prioritas = "<<temp->data.prior<<"\n";
-        std::cout<<"edit menjadi : "; std::cin>>temp->data.prior;
-        std::cout<<"banyak barang = "<<temp->data.banyakBarang<<"\n";
-        std::cout<<"ketik:\n1. tambah\n2. hapus\n3. tidak keduanya\n";
-        int ch;
-        int editn;
-        std::cin>>ch;
-        std::cin.ignore();
-        switch (ch){
-            case 1:
-                std::cout<<"barang ke-"<<temp->data.banyakBarang+1<<"\n";
-                temp->data.banyakBarang++;
-                pushBarang(temp->data.unit, createnode());
-                break;
-            case 2:
-                temp->data.banyakBarang--;
-                break;//edit barangnya di pop
-            case 3:
-                //test
-                break;
-        }
-        std::cout<<"id kurir 6 char = "<<temp->data.kur.idkurir<<"\n";
-        std::cout<<"edit menjadi:"; std::cin>>temp->data.kur.idkurir;
-        std::cin.ignore();
-        std::cout<<"nama kurir"<<temp->data.kur.nama<<"\n";
-        std::cout<<"edit menjadi:";getline(std::cin, temp->data.kur.nama, '\n');
+        del->next->prev = del->prev;
+        del->prev->next = del->next;
+        del->next = nullptr;
+        del->prev = nullptr;
     }
-    return top;
+    push(cache, del);
+    delete del;
+
 }

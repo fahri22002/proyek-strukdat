@@ -8,6 +8,8 @@
 
 int main(){
     stack topRiwayat;
+    stack cache;
+    cache = createstack();
     topRiwayat = createstack();
     char hidup = 'y';
     while (hidup == 'y'){
@@ -21,10 +23,7 @@ int main(){
         } else if (ch == 2){
             push(topRiwayat, createRiwayat(input()));
         } else if (ch == 3){
-            char id[7];
-            std::cin>>id;
-            std::cin.ignore();
-            edit(topRiwayat, searchData(topRiwayat, id));
+            deleteData(topRiwayat, searchData(topRiwayat), cache);
         } else if (ch == 4){
 
         } else if (ch == 5){
