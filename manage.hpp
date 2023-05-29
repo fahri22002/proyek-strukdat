@@ -91,7 +91,7 @@ void deleteData(stack &top, riwayatptr search, stack& cache){
         del->next = nullptr;
         del->prev = nullptr;
     }
-    push(cache, del);
+    ;
     delete del;
 
 }

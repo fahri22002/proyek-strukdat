@@ -13,7 +13,7 @@ int main(){
     topRiwayat = createstack();
     char hidup = 'y';
     while (hidup == 'y'){
-        std::cout<<"Pilih :\n1. Tampilkan data\n2. Input data antar\n3. Edit data antar";
+        std::cout<<"Pilih :\n1. Tampilkan data\n2. Input data antar\n3. Hapus data antar";
         std::cout<<"\n4. Undo\n5. Redo\n6. Tampilkan riwayat barang sampai";
         std::cout<<"\n7. Edit data barang\n8. Edit data kurir\n9. input data kurir";
         int ch;
