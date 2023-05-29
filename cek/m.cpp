@@ -25,6 +25,7 @@ int main(){
             showRiwayat(firstList);
         } else if (ch == 2){
             addList(firstList, lastList, createRiwayat(input()), topUndo, ch);
+            delRedo(topRedo);
         } else if (ch == 3){
             
         } else if (ch == 4){

@@ -35,12 +35,19 @@ void undo (stack &topUndo, stack &topRedo, list &first){
     }
 }
 void redo (stack &topUndo, stack &topRedo, list &first, list &last){
-    std::cout<<topRedo->opcode<<topRedo->letak<<topRedo->data->data.prior;
+    
     if (isStackEmpty(topRedo)){
         return;
     } else if (topRedo->opcode == 2){
         if (topRedo->letak == 1){
-            first = topRedo->data;
+            if (first == nullptr){
+                first = topRedo->data;
+            } else {
+                topRedo->data->next = first;
+                first->prev = topRedo->data;
+                first = first->prev;
+            }
+            
             popStack (topRedo, topUndo);
         } else {
             list temp = first;
@@ -62,4 +69,16 @@ void redo (stack &topUndo, stack &topRedo, list &first, list &last){
         }
         
     }
+}
+void delRedo (stack &topRedo){
+    std::cout<<"A";
+    if (!isStackEmpty(topRedo)){
+        while (topRedo != nullptr){
+            stack del = topRedo;
+            topRedo = topRedo->next;
+            delete del;
+            std::cout<<"b";
+        }
+    }
+    std::cout<<"A";
 }
