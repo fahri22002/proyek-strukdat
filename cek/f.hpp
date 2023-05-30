@@ -53,3 +53,38 @@ void showRiwayat(list first){
         i++;
     }
 }
+void deleteAntar(list &first, list &last, stack &topUndo){
+    int idantar, letak=1;
+    std::cin>>idantar;
+    std::cin.ignore();
+    list temp = first;
+    while(temp->data.idantar != idantar){
+        temp = temp->next;
+        letak++;
+        if (temp == nullptr){
+            std::cout<<"tidak ditemukan\n";
+            return;
+        }
+    }std::cout<<letak;
+    if (temp->prev == nullptr && temp->next == nullptr){
+        pushCache (topUndo, createCache(temp, 3, letak));
+        last = nullptr;
+        first = nullptr;
+    } else if (temp->prev == nullptr){
+        first = temp->next;
+        temp->next = nullptr;
+        first->prev = nullptr;
+        pushCache (topUndo, createCache(temp, 3, letak));
+    } else if (temp->next == nullptr){
+        last = temp->prev;
+        temp->prev = nullptr;
+        last->next = nullptr;
+        pushCache (topUndo, createCache(temp, 3, letak));
+    } else {
+        temp->next->prev = temp->prev;
+        temp->prev->next = temp->next;
+        temp->prev = nullptr;
+        temp->next = nullptr;
+        pushCache (topUndo, createCache(temp, 3, letak));
+    }
+}

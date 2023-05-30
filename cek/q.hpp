@@ -3,7 +3,7 @@
 #include <iostream>
 #include "s.hpp"
 
-void undo (stack &topUndo, stack &topRedo, list &first){
+void undo (stack &topUndo, stack &topRedo, list &first, list& last){
     if (isStackEmpty(topUndo)){
         return;
     } else if (topUndo->opcode == 2){
@@ -13,6 +13,9 @@ void undo (stack &topUndo, stack &topRedo, list &first){
                 first->prev->next = nullptr;
                 first->prev = nullptr;
             }
+            if (first == nullptr){
+                last = nullptr;
+            }
             popStack (topUndo, topRedo);
         } else {
             list temp = first;
@@ -20,6 +23,7 @@ void undo (stack &topUndo, stack &topRedo, list &first){
                 temp = temp->next;
             }
             if (temp->next == nullptr){
+                last = temp->prev;
                 temp->prev->next = nullptr;
                 temp->prev = nullptr;
                 popStack (topUndo, topRedo);
@@ -32,6 +36,34 @@ void undo (stack &topUndo, stack &topRedo, list &first){
             }
         }
         
+    } else if (topUndo->opcode == 3){
+        if (topUndo->letak == 1){
+            if (first == nullptr){
+                first = last = topUndo->data;
+            } else {
+                topUndo->data->next = first;
+                first->prev = topUndo->data;
+                first = topUndo->data;
+                popStack (topUndo, topRedo);
+            }
+        } else {
+            list temp = first;
+            for (int i = 1; i< topUndo->letak; i++){
+                temp = temp->next;
+            }
+            if (temp == nullptr){
+                last->next = topUndo->data;
+                topUndo->data->prev = last;
+                last = topUndo->data;
+                popStack (topUndo, topRedo);
+            } else {
+                topUndo->data->next = temp;
+                topUndo->data->prev = temp->prev;
+                temp->prev->next = topUndo->data;
+                temp->prev = topUndo->data;
+                popStack (topUndo, topRedo);
+            }
+        }
     }
 }
 void redo (stack &topUndo, stack &topRedo, list &first, list &last){
@@ -42,6 +74,7 @@ void redo (stack &topUndo, stack &topRedo, list &first, list &last){
         if (topRedo->letak == 1){
             if (first == nullptr){
                 first = topRedo->data;
+                last = first;
             } else {
                 topRedo->data->next = first;
                 first->prev = topRedo->data;
@@ -68,17 +101,50 @@ void redo (stack &topUndo, stack &topRedo, list &first, list &last){
             }
         }
         
+    } else if (topRedo->opcode == 3){
+        if (topRedo->letak == 1){
+            first = first->next;
+            if (first != nullptr && first->prev != nullptr){
+                first->prev->next = nullptr;
+                first->prev = nullptr;
+            }
+            if (first == nullptr){
+                last = nullptr;
+            }
+            popStack (topRedo, topUndo);
+        } else {
+            list temp = first;
+            for (int i = 1; i< topRedo->letak; i++){
+                temp = temp->next;
+            }
+            if (temp->next == nullptr){
+                last = temp->prev;
+                temp->prev->next = nullptr;
+                temp->prev = nullptr;
+                popStack (topRedo, topUndo);
+            } else {
+                temp->next->prev = temp->prev;
+                temp->prev->next = temp->next;
+                temp->next = nullptr;
+                temp->prev = nullptr;
+                popStack (topRedo, topUndo);
+            }
+        }
     }
 }
 void delRedo (stack &topRedo){
-    std::cout<<"A";
     if (!isStackEmpty(topRedo)){
         while (topRedo != nullptr){
             stack del = topRedo;
             topRedo = topRedo->next;
+            listBarang temp = del->data->data.unit, delunit;
+            while (temp != nullptr){
+                delunit = temp;
+                temp = temp->next;
+                delete delunit;
+            }
+            delete del->data;
             delete del;
-            std::cout<<"b";
         }
     }
-    std::cout<<"A";
 }
