@@ -19,13 +19,13 @@ antar input(){
     }
     send.unit = unit;
     
-    std::cout<<"Masukkan id kurir (6 char)  : ";
+    std::cout<<"Masukkan id kurir           : ";
     std::cin>>kur.idkurir;
     std::cin.ignore();
     std::cout<<"Masukkan nama kurir         : ";
     getline(std::cin, kur.nama, '\n');
     
-    std::cout<<"Masukkan id antar (7 char)  : ";
+    std::cout<<"Masukkan id antar           : ";
     std::cin>>send.idantar;
     std::cout<<"Masukkan prioritas          : ";
     std::cin>>send.prior;
@@ -60,6 +60,9 @@ void showRiwayat(list first){
     }
 }
 void deleteAntar(list &first, list &last, stack &topUndo){
+    if (first == nullptr){
+        return;
+    }
     int idantar, letak=1;
     std::cout << "ID Antar : ";
     std::cin>>idantar;
