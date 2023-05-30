@@ -2,7 +2,7 @@
 #include <iostream>
 
 struct barang{
-    char idBarang[5];
+    int idBarang;
     std::string namaPengirim;
     std::string alamatPengirim;
     std::string namaPenerima;
@@ -12,14 +12,14 @@ struct barang{
     barang *prev;
 };
 struct kurir{
-    char idkurir[6];
+    int idkurir;
     std::string nama;
 
 };
 typedef barang *ptrBarang;
 using listBarang = ptrBarang;
 struct antar{
-    char idantar[7];
+    int idantar;
     int banyakBarang;
     listBarang unit;
     kurir kur;
@@ -68,6 +68,7 @@ void pushBarang(listBarang &top, ptrBarang baru){
         top = baru;
     }
 }
+
 stack createstack(){
     return nullptr;
 }

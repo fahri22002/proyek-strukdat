@@ -8,10 +8,12 @@
 
 int main(){
     stack topRiwayat;
+    stack cache;
+    cache = createstack();
     topRiwayat = createstack();
     char hidup = 'y';
     while (hidup == 'y'){
-        std::cout<<"Pilih :\n1. Tampilkan data\n2. Input data antar\n3. Edit data antar";
+        std::cout<<"Pilih :\n1. Tampilkan data\n2. Input data antar\n3. Hapus data antar";
         std::cout<<"\n4. Undo\n5. Redo\n6. Tampilkan riwayat barang sampai";
         std::cout<<"\n7. Edit data barang\n8. Edit data kurir\n9. input data kurir";
         int ch;
@@ -21,10 +23,7 @@ int main(){
         } else if (ch == 2){
             push(topRiwayat, createRiwayat(input()));
         } else if (ch == 3){
-            char id[7];
-            std::cin>>id;
-            std::cin.ignore();
-            edit(topRiwayat, searchData(topRiwayat, id));
+            deleteData(topRiwayat, searchData(topRiwayat), cache);
         } else if (ch == 4){
 
         } else if (ch == 5){
