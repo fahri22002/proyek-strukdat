@@ -7,7 +7,6 @@
 #include "s.hpp"
 #include "q.hpp"
 
-
 int main(){
     list firstList, lastList;
     list cache;
@@ -16,20 +15,13 @@ int main(){
     createList(firstList, lastList);
     char hidup = 'y';
     while (hidup == 'y'){
-        if (!isStackEmpty(topUndo)){
-            std::cout<<"<-Undo ";
-        } 
-        if (!isStackEmpty(topRedo)){
-            std::cout<<"Redo->\n";
-        } else {
-            std::cout<<"\n";
-        }
         std::cout<<"Pilih :\n1. Tampilkan data\n2. Input data antar\n3. Hapus data antar";
         std::cout<<"\n4. Undo\n5. Redo\n6. Tampilkan riwayat barang sampai";
         std::cout<<"\n7. Edit data barang\n8. Edit data kurir\n9. input data kurir\n";
         int ch;
+        std::cout << "Pilihan : ";
         std::cin>>ch;
-        
+        std::cout << "\n";
         if (ch == 1){
             showRiwayat(firstList);
         } else if (ch == 2){
@@ -39,7 +31,7 @@ int main(){
             deleteAntar(firstList, lastList, topUndo);
             delRedo(topRedo);
         } else if (ch == 4){
-            undo(topUndo, topRedo, firstList, lastList);
+            undo(topUndo, topRedo, firstList,lastList);
         } else if (ch == 5){
             redo(topUndo, topRedo, firstList, lastList);
         } else if (ch == 6){
@@ -47,7 +39,7 @@ int main(){
         } else {
 
         }
-        std::cout<<"Action (y/n)\n";
+        std::cout<<"\nAction (y/n) : ";
         std::cin>>hidup;
     }
     return 0;

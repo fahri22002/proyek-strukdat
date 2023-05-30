@@ -9,25 +9,25 @@ antar input(){
     antar send;
     kurir kur;
 
-    std::cout<<"masukkan banyak barang\n";
+    std::cout<<"Masukkan banyak barang      : ";
     std::cin>>send.banyakBarang;
     listBarang unit;
     unit = createlistbarang();
     for (int i = 0; i<send.banyakBarang; i++){
-        std::cout<<"barang ke-"<<i+1<<"\n";
+        std::cout<<"Barang ke-"<<i+1<<"\n";
         pushBarang(unit, createnode());
     }
     send.unit = unit;
     
-    std::cout<<"masukkan id kurir 6 char\n";
+    std::cout<<"Masukkan id kurir (6 char)  : ";
     std::cin>>kur.idkurir;
     std::cin.ignore();
-    std::cout<<"masukkan nama kurir\n";
+    std::cout<<"Masukkan nama kurir         : ";
     getline(std::cin, kur.nama, '\n');
     
-    std::cout<<"masukkan id antar 7 char\n";
+    std::cout<<"Masukkan id antar (7 char)  : ";
     std::cin>>send.idantar;
-    std::cout<<"masukkan prioritas\n";
+    std::cout<<"Masukkan prioritas          : ";
     std::cin>>send.prior;
     std::cin.ignore();
     send.kur = kur;
@@ -37,16 +37,22 @@ antar input(){
 void showRiwayat(list first){
     int i = 1;
     if (first == nullptr){
+        std::cout << "- Tidak ada data - \n"; 
         return;
     }
     while (first != nullptr){
-        std::cout<<i<<"\n";//nanti buat tabel
-        std::cout<<"id antar "<<first->data.idantar<<"\n";
-        std::cout<<"prior "<<first->data.prior<<"\n";
-        std::cout<<"nama kurir "<<first->data.kur.nama<<"\n";
+        std::cout<<"Data " << i <<"\n";//nanti buat tabel
+        std::cout<<"ID antar        : "<<first->data.idantar<<"\n";
+        std::cout<<"Prioritas       : "<<first->data.prior<<"\n";
+        std::cout<<"Nama Kurir      : "<<first->data.kur.nama<<"\n";
+        std::cout<<"Nama pengirim   : "<<first->data.unit->namaPengirim<<"\n";
+        std::cout<<"Alamat pengirim : "<<first->data.unit->alamatPengirim<<"\n";
+        std::cout<<"No. Hp pengirim : "<<first->data.unit->noHp<<"\n";
+        std::cout<<"Nama penerima   : "<<first->data.unit->namaPenerima<<"\n";
+        std::cout<<"Alamat penerima : "<<first->data.unit->alamatPenerima<<"\n";
         listBarang temp = first->data.unit;
         for (int i = 0; i<first->data.banyakBarang; i++){
-            std::cout<<"id barang "<<temp->idBarang<<"\n";
+            std::cout<<"ID barang " << i+1 << "     : "<<temp->idBarang<<"\n";
             temp = temp->next;
         }
         first = first->next;
@@ -55,6 +61,7 @@ void showRiwayat(list first){
 }
 void deleteAntar(list &first, list &last, stack &topUndo){
     int idantar, letak=1;
+    std::cout << "ID Antar : ";
     std::cin>>idantar;
     std::cin.ignore();
     list temp = first;
@@ -62,7 +69,7 @@ void deleteAntar(list &first, list &last, stack &topUndo){
         temp = temp->next;
         letak++;
         if (temp == nullptr){
-            std::cout<<"tidak ditemukan\n";
+            std::cout<<"Tidak ditemukan\n";
             return;
         }
     }std::cout<<letak;
