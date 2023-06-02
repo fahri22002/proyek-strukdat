@@ -40,6 +40,7 @@ void undo (stack &topUndo, stack &topRedo, list &first, list& last){
         if (topUndo->letak == 1){
             if (first == nullptr){
                 first = last = topUndo->data;
+                popStack (topUndo, topRedo);
             } else {
                 topUndo->data->next = first;
                 first->prev = topUndo->data;
@@ -64,6 +65,29 @@ void undo (stack &topUndo, stack &topRedo, list &first, list& last){
                 popStack (topUndo, topRedo);
             }
         }
+    } else if (topUndo->opcode == 4){
+        list temp = first;
+        for (int i = 1; i< topUndo->letak; i++){
+            temp = temp->next;
+        }
+        topUndo->data->next = temp->next;
+        topUndo->data->prev = temp->prev;
+        if (temp->next != nullptr){
+            temp->next->prev = topUndo->data;
+        } else {
+            last = topUndo->data;
+        }
+        if (temp->prev != nullptr){
+            temp->prev->next = topUndo->data;
+        } else {
+            first = topUndo->data;
+        }
+        temp->next = nullptr;
+        temp->prev = nullptr;
+        pushCache(topRedo, createCache(temp, 4, topUndo->letak));
+        stack del = topUndo;
+        topUndo = topUndo->next;
+        delete del;
     }
 }
 void redo (stack &topUndo, stack &topRedo, list &first, list &last){
@@ -130,6 +154,29 @@ void redo (stack &topUndo, stack &topRedo, list &first, list &last){
                 popStack (topRedo, topUndo);
             }
         }
+    } else if (topRedo->opcode == 4){
+        list temp = first;
+        for (int i = 1; i< topRedo->letak; i++){
+            temp = temp->next;
+        }
+        topRedo->data->next = temp->next;
+        topRedo->data->prev = temp->prev;
+        if (temp->next != nullptr){
+            temp->next->prev = topRedo->data;
+        } else {
+            last = topRedo->data;
+        }
+        if (temp->prev != nullptr){
+            temp->prev->next = topRedo->data;
+        } else {
+            first = topRedo->data;
+        }
+        temp->next = nullptr;
+        temp->prev = nullptr;
+        pushCache(topUndo, createCache(temp, 4, topRedo->letak));
+        stack del = topRedo;
+        topRedo = topRedo->next;
+        delete del;
     }
 }
 void delRedo (stack &topRedo){

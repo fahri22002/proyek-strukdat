@@ -54,6 +54,7 @@ bool isEmpty(list top){
 }
 void addList (list &first, list &last, riwayatptr baru, stack &topUndo, int opcode){
     if (isEmpty(first)){
+        std::cout<<"a"<<baru->data.prior;
         first = baru;
         last = baru;
         pushCache (topUndo, createCache(baru, opcode, int(1)));
@@ -67,16 +68,16 @@ void addList (list &first, list &last, riwayatptr baru, stack &topUndo, int opco
         } else {
             list temp = last;
             int lokasi = banyakList(first) + 1;
-            std::cout<<lokasi;
             while (baru->data.prior > temp->data.prior ){
                 temp = temp->prev;
                 lokasi--;
                 if (temp == nullptr) {
                     break;
                 }
-            }std::cout<<lokasi;
+            }
             pushCache (topUndo, createCache(baru, opcode, lokasi));
             if (temp == nullptr){
+                std::cout<<(last==first)<<"\n";
                 first->prev = baru;
                 baru->next = first;
                 first = baru;

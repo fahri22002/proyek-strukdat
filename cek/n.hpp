@@ -31,7 +31,7 @@ ptrBarang createnode(){
     getline(std::cin, unit->namaPengirim, '\n');
     std::cout<<"Masukkan alamat pengirim    : ";
     getline(std::cin, unit->alamatPengirim, '\n');
-    std::cout<<"Masukkan No. Hp pengirim      =: ";
+    std::cout<<"Masukkan No. Hp pengirim    : ";
     std::cin>>unit->noHp;
     std::cin.ignore();
     std::cout<<"Masukkan nama penerima      : ";
