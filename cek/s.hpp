@@ -54,7 +54,6 @@ bool isEmpty(list top){
 }
 void addList (list &first, list &last, riwayatptr baru, stack &topUndo, int opcode){
     if (isEmpty(first)){
-        std::cout<<"a"<<baru->data.prior;
         first = baru;
         last = baru;
         pushCache (topUndo, createCache(baru, opcode, int(1)));
@@ -77,7 +76,6 @@ void addList (list &first, list &last, riwayatptr baru, stack &topUndo, int opco
             }
             pushCache (topUndo, createCache(baru, opcode, lokasi));
             if (temp == nullptr){
-                std::cout<<(last==first)<<"\n";
                 first->prev = baru;
                 baru->next = first;
                 first = baru;

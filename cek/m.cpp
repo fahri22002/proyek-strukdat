@@ -83,9 +83,11 @@ int main(){
             
             
         } else if (ch == 7){
-            addList(selesaiF, selesaiL, createRiwayat(firstList->data), topUndo, 7);
-            deleteAntar(firstList, lastList, topUndo, firstList->data.idantar, 7);
-            delRedo(topRedo);
+            if (firstList != nullptr){
+                addList(selesaiF, selesaiL, createRiwayat(firstList->data), topUndo, 7);
+                deleteAntar(firstList, lastList, topUndo, firstList->data.idantar, 7);
+                delRedo(topRedo);
+            } 
         } else if (ch == 8) {
             showRiwayat(selesaiF);
         }
