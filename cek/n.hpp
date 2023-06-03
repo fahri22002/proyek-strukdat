@@ -24,19 +24,19 @@ listBarang createlistbarang(){
 }
 ptrBarang createnode(){
     ptrBarang unit = new barang;
-    std::cout<<"masukkan id unit (5 char)\n";
+    std::cout<<"Masukkan id unit (5 char)   : ";
     std::cin>>unit->idBarang;
     std::cin.ignore();
-    std::cout<<"masukkan nama pengirim\n";
+    std::cout<<"Masukkan nama pengirim      : ";
     getline(std::cin, unit->namaPengirim, '\n');
-    std::cout<<"masukkan alamat pengirim\n";
+    std::cout<<"Masukkan alamat pengirim    : ";
     getline(std::cin, unit->alamatPengirim, '\n');
-    std::cout<<"masukkan noHP pengirim\n";
+    std::cout<<"Masukkan No. Hp pengirim    : ";
     std::cin>>unit->noHp;
     std::cin.ignore();
-    std::cout<<"masukkan nama penerima\n";
+    std::cout<<"Masukkan nama penerima      : ";
     getline(std::cin, unit->namaPenerima, '\n');
-    std::cout<<"masukkan alamat penerima\n";
+    std::cout<<"Masukkan alamat penerima    : ";
     getline(std::cin, unit->alamatPenerima, '\n');
     unit->next = nullptr;
     unit->prev = nullptr;

@@ -67,14 +67,13 @@ void addList (list &first, list &last, riwayatptr baru, stack &topUndo, int opco
         } else {
             list temp = last;
             int lokasi = banyakList(first) + 1;
-            std::cout<<lokasi;
             while (baru->data.prior > temp->data.prior ){
                 temp = temp->prev;
                 lokasi--;
                 if (temp == nullptr) {
                     break;
                 }
-            }std::cout<<lokasi;
+            }
             pushCache (topUndo, createCache(baru, opcode, lokasi));
             if (temp == nullptr){
                 first->prev = baru;
