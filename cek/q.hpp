@@ -191,7 +191,6 @@ void delRedo (stack &topRedo){
                 stack del = topRedo;
                 topRedo = topRedo->next;
                 del->next = nullptr;
-                delete del->data;
                 delete del;
                 del = topRedo;
                 topRedo = topRedo->next;
