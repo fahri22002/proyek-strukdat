@@ -3,7 +3,7 @@
 #include "n.hpp"
 #include "s.hpp"
 #include <iostream>
-#include <cstring>
+#include <iomanip>
 
 antar input(){
     antar send;
@@ -34,25 +34,43 @@ antar input(){
 
     return send;
 }
+void lineTable (bool i){
+    if(i){
+        std::cout<<"+----+----------+----------+----------+---------------+---------------+----------+---------------+---------------+---------------+---------------+---------------+\n";
+    }
+}
+void awalTableBarang (){
+    std::cout<<"|"<<std::setw(5)<<"|"<<std::setw(11)<<"|"<<std::setw(11)<<"|"<<std::setw(11)<<"|"<<std::setw(16)<<"|"<<std::setw(16)<<"|";
+}
 void showRiwayat(list first){
     int i = 1;
     if (first == nullptr){
         std::cout << "- Tidak ada data - \n"; 
         return;
     }
+    lineTable(1);
+    std::cout<<"|NO  |ID antar  |Prioritas |ID kurir  |Nama Kurir     |Banyak barang  |ID Barang |Nama Pengirim  |Alamat Pengirim|No. Hp Pengirim|Nama Penerima  |Alamat Penerima|\n";
+    lineTable(1);
     while (first != nullptr){
-        std::cout<<"Data " << i <<"\n";//nanti buat tabel
-        std::cout<<"ID antar        : "<<first->data.idantar<<"\n";
-        std::cout<<"Prioritas       : "<<first->data.prior<<"\n";
-        std::cout<<"Nama Kurir      : "<<first->data.kur.nama<<"\n";
-        std::cout<<"Nama pengirim   : "<<first->data.unit->namaPengirim<<"\n";
-        std::cout<<"Alamat pengirim : "<<first->data.unit->alamatPengirim<<"\n";
-        std::cout<<"No. Hp pengirim : "<<first->data.unit->noHp<<"\n";
-        std::cout<<"Nama penerima   : "<<first->data.unit->namaPenerima<<"\n";
-        std::cout<<"Alamat penerima : "<<first->data.unit->alamatPenerima<<"\n";
+        std::cout<<"|";
+        std::cout<<std::setw(4) << i <<"|";//nanti buat tabel
+        std::cout<<first->data.idantar <<std::setw(10)<<"|";
+        std::cout<<first->data.prior   <<std::setw(10)<<"|";
+        std::cout<<first->data.kur.idkurir<<std::setw(10)<<"|";
+        std::cout<<first->data.kur.nama<<std::setw(15)<<"|";
+        std::cout<<first->data.banyakBarang<<std::setw(15)<<"|";
         listBarang temp = first->data.unit;
         for (int i = 0; i<first->data.banyakBarang; i++){
-            std::cout<<"ID barang " << i+1 << "     : "<<temp->idBarang<<"\n";
+            if (i!=0){
+                awalTableBarang();
+            }
+            std::cout<<temp->idBarang<<std::setw(10)<<"|";
+            std::cout<<temp->namaPengirim<<std::setw(15)<<"|";
+            std::cout<<temp->alamatPengirim<<std::setw(15)<<"|";
+            std::cout<<temp->noHp<<std::setw(15)<<"|";
+            std::cout<<temp->namaPenerima<<std::setw(15)<<"|";
+            std::cout<<temp->alamatPenerima<<std::setw(16)<<"|\n";
+            lineTable(i == first->data.banyakBarang -1);
             temp = temp->next;
         }
         first = first->next;
@@ -108,7 +126,7 @@ antar inputEdit(riwayatptr edit){
     antar send;
     kurir kur;
     std::cout<<"id antar yang diedit : "<<edit->data.idantar<<"\n";
-    std::cout<<"prioritas : "<<edit->data.idantar<<"\n";
+    std::cout<<"prioritas : "<<edit->data.prior<<"\n";
     std::cout<<"Masukkan banyak barang      : ";
     std::cin>>send.banyakBarang;
     listBarang unit;
