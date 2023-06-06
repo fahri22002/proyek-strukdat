@@ -8,7 +8,9 @@
 
 
 void printSeparatorLine() {
-    std::cout << "-------------------------------------------\n";
+    std::cout<<std::resetiosflags(std::ios::adjustfield);
+    std::cout <<"\n"<<std::setw(163)<<std::setfill('-')<< "\n";
+    std::cout<<std::setfill(' ');
 }
 void printHeader(const std::string& text) {
     std::cout << "=== " << text << " ===\n";
@@ -22,6 +24,7 @@ int main(){
     createList(selesaiF, selesaiL);
     char hidup = 'y';
     while (hidup != 'n'){
+        std::cout<<"\n";
         printSeparatorLine();
         if (!isStackEmpty(topUndo)){
             std::cout<<"<UNDO|";
@@ -40,7 +43,8 @@ int main(){
         int ch;
         printSeparatorLine();
         std::cout << "Pilihan : ";
-        std::cin>>ch;
+        std::cin>>ch;std::cin.ignore();
+        std::cout<<"\n";
         printSeparatorLine();
         std::cout << "\n";
         if (ch == 1){
@@ -120,7 +124,7 @@ int main(){
             showRiwayat(selesaiF);
         }
         std::cout<<"\nAction (y/n) : ";
-        std::cin>>hidup;
+        std::cin>>hidup;std::cin.ignore();
     }
     return 0;
 }
