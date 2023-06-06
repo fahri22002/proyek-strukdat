@@ -56,6 +56,9 @@ int main(){
             std::cout << "ID Antar : ";
             std::cin>>idantar;
             std::cin.ignore();
+            if (!isThere(firstList, idantar)){
+                std::cout<<"ID antar tidak ditemukan\n";
+            }
             deleteAntar(firstList, lastList, topUndo, idantar, 3);
             delRedo(topRedo);
         } else if (ch == 4){
@@ -99,7 +102,7 @@ int main(){
                     redo(topUndo, topRedo, firstList, lastList);
                 }
             } else {
-                printHeader("UNDO GAGAL");
+                printHeader("REDO GAGAL");
             }
             
             

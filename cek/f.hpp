@@ -53,23 +53,23 @@ void showRiwayat(list first){
     lineTable(1);
     while (first != nullptr){
         std::cout<<"|";
-        std::cout<<std::setw(4) << i <<"|";//nanti buat tabel
-        std::cout<<first->data.idantar <<std::setw(10)<<"|";
-        std::cout<<first->data.prior   <<std::setw(10)<<"|";
-        std::cout<<first->data.kur.idkurir<<std::setw(10)<<"|";
-        std::cout<<first->data.kur.nama<<std::setw(15)<<"|";
-        std::cout<<first->data.banyakBarang<<std::setw(15)<<"|";
+        std::cout<<std::setw(4) <<std::right<< i <<"|";//nanti buat tabel
+        std::cout<<std::setw(10)<<std::left<<first->data.idantar <<"|";
+        std::cout<<std::setw(10)<<std::left<<first->data.prior   <<"|";
+        std::cout<<std::setw(10)<<std::left<<first->data.kur.idkurir<<"|";
+        std::cout<<std::setw(15)<<std::left<<first->data.kur.nama<<"|";
+        std::cout<<std::setw(15)<<std::left<<first->data.banyakBarang<<"|";
         listBarang temp = first->data.unit;
         for (int i = 0; i<first->data.banyakBarang; i++){
             if (i!=0){
                 awalTableBarang();
             }
-            std::cout<<temp->idBarang<<std::setw(10)<<"|";
-            std::cout<<temp->namaPengirim<<std::setw(15)<<"|";
-            std::cout<<temp->alamatPengirim<<std::setw(15)<<"|";
-            std::cout<<temp->noHp<<std::setw(15)<<"|";
-            std::cout<<temp->namaPenerima<<std::setw(15)<<"|";
-            std::cout<<temp->alamatPenerima<<std::setw(16)<<"|\n";
+            std::cout<<std::setw(10)<<std::left<<temp->idBarang<<"|";
+            std::cout<<std::setw(15)<<std::left<<temp->namaPengirim<<"|";
+            std::cout<<std::setw(15)<<std::left<<temp->alamatPengirim<<"|";
+            std::cout<<std::setw(15)<<std::left<<temp->noHp<<"|";
+            std::cout<<std::setw(15)<<std::left<<temp->namaPenerima<<"|";
+            std::cout<<std::setw(16)<<std::left<<temp->alamatPenerima<<"|\n";
             lineTable(i == first->data.banyakBarang -1);
             temp = temp->next;
         }
