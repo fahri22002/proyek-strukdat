@@ -40,7 +40,7 @@ void lineTable (bool i){
     }
 }
 void awalTableBarang (){
-    std::cout<<"|"<<std::setw(5)<<"|"<<std::setw(11)<<"|"<<std::setw(11)<<"|"<<std::setw(11)<<"|"<<std::setw(16)<<"|"<<std::setw(16)<<"|";
+    std::cout<<std::setw(5)<<"|"<<std::setw(11)<<"|"<<std::setw(11)<<"|"<<std::setw(11)<<"|"<<std::setw(16)<<"|"<<std::setw(16)<<"|"<<"|";
 }
 void showRiwayat(list first){
     int i = 1;
@@ -69,7 +69,7 @@ void showRiwayat(list first){
             std::cout<<std::setw(15)<<std::left<<temp->alamatPengirim<<"|";
             std::cout<<std::setw(15)<<std::left<<temp->noHp<<"|";
             std::cout<<std::setw(15)<<std::left<<temp->namaPenerima<<"|";
-            std::cout<<std::setw(16)<<std::left<<temp->alamatPenerima<<"|\n";
+            std::cout<<std::setw(15)<<std::left<<temp->alamatPenerima<<"|\n";
             lineTable(i == first->data.banyakBarang -1);
             temp = temp->next;
         }
