@@ -181,17 +181,34 @@ void redo (stack &topUndo, stack &topRedo, list &first, list &last){
 }
 void delRedo (stack &topRedo){
     if (!isStackEmpty(topRedo)){
+        bool mark = false;
         while (topRedo != nullptr){
-            stack del = topRedo;
-            topRedo = topRedo->next;
-            listBarang temp = del->data->data.unit, delunit;
-            while (temp != nullptr){
-                delunit = temp;
-                temp = temp->next;
-                delete delunit;
+            if (topRedo->opcode == 3){
+                stack del = topRedo;
+                topRedo = topRedo->next;
+                delete del;
+            } else if (topRedo->opcode == 7 && topRedo->next->opcode == 7){
+                stack del = topRedo;
+                topRedo = topRedo->next;
+                del->next = nullptr;
+                delete del;
+                del = topRedo;
+                topRedo = topRedo->next;
+                delete del;
+            } else {
+                stack del = topRedo;
+                topRedo = topRedo->next;
+                listBarang temp = del->data->data.unit, delunit;
+                while (temp != nullptr){
+                    delunit = temp;
+                    temp = temp->next;
+                    delunit->next = nullptr;
+                    delete delunit;
+                }
+                del->next = nullptr;
+                delete del->data;
+                delete del;
             }
-            delete del->data;
-            delete del;
         }
     }
 }
