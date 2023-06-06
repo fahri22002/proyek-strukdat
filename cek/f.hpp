@@ -87,7 +87,6 @@ void deleteAntar(list &first, list &last, stack &topUndo, int idantar, int opcod
         temp = temp->next;
         letak++;
         if (temp == nullptr){
-            std::cout<<"Tidak ditemukan\n";
             return;
         }
     }
